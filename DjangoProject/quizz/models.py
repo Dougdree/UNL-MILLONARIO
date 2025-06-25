@@ -26,20 +26,20 @@ class Respuesta(models.Model):
         return f"{self.descripcion} ({'Correcta' if self.correcta else 'Incorrecta'})"
 
 
-class Grupo(models.Model):
-    nombre = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.nombre
-
-
 class Estudiante(models.Model):
     nombre = models.CharField(max_length=100)
     correo = models.EmailField(unique=True)
-    grupo = models.ForeignKey(Grupo, on_delete=models.SET_NULL, null=True, related_name='estudiantes')
 
     def __str__(self):
         return f"{self.nombre} - {self.correo}"
+
+
+class Grupo(models.Model):
+    nombre = models.CharField(max_length=100)
+    estudiantes = models.ManyToManyField(Estudiante, related_name='grupos')
+
+    def __str__(self):
+        return self.nombre
 
 
 class Prueba(models.Model):
