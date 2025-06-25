@@ -1,0 +1,56 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #1b0034, #330066);
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 60px auto;
+    background-color: rgba(0, 0, 40, 0.8);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(128, 0, 255, 0.6);
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #ffcc00;
+    margin-bottom: 30px;
+}
+
+.card-prueba {
+    background-color: #290044;
+    border: 2px solid #6600cc;
+    padding: 15px 25px;
+    margin: 15px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    color: white; /* ← Añadido */
+}
+
+.card-prueba span {
+    color: white; /* ← Añadido */
+    text-shadow: 1px 1px 2px #000; /* ← Para mejor visibilidad */
+}
+
+.card-prueba:hover {
+    background-color: #3e0066;
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #cc00ff;
+}
+
+a.iniciar-link {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+}
+
+a.iniciar-link:hover {
+    text-decoration: underline;
+}

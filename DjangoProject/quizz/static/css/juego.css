@@ -1,0 +1,65 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(circle at center, #1b103f, #0b061a);
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 40px 20px;
+    background-color: #2e1c6b;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #ffd700;
+    text-shadow: 1px 1px 5px #000;
+}
+
+button.opcion {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4b2ca0;
+    box-shadow: 0 0 10px rgba(170, 170, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button.opcion:hover {
+    background-color: #6749c4;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+button.correcta {
+    background-color: #28a745 !important;
+    box-shadow: 0 0 15px #28a745;
+}
+
+button.incorrecta {
+    background-color: #dc3545 !important;
+    box-shadow: 0 0 15px #dc3545;
+}
+
+.pregunta-numero {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #bbbbbb;
+}

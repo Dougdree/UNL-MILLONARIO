@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #1e0036, #3d0075);
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+.container {
+    background-color: rgba(0, 0, 60, 0.95);
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+    max-width: 600px;
+    width: 90%;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 35px;
+    color: #FFD700;
+    text-shadow: 0 0 10px #000;
+}
+
+.table-result {
+    margin: 0 auto 30px auto;
+    width: 100%;
+    border-collapse: collapse;
+    color: #fff;
+}
+
+.table-result td {
+    padding: 15px 20px;
+    font-size: 20px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.table-result tr:nth-child(even) {
+    background-color: #290055;
+}
+
+.table-result tr:nth-child(odd) {
+    background-color: #3d0075;
+}
+
+.button-volver {
+    margin-top: 15px;
+    padding: 15px 35px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #6a00d2;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.button-volver:hover {
+    background-color: #8c00ff;
+    transform: scale(1.05);
+}
+
+/* Para que el confeti esté detrás del panel */
+#confetti-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pregunta en juego</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/juego.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="pregunta-numero">
+            Pregunta {{ numero_actual }} de {{ total }}
+        </div>
+
+        <h1>{{ pregunta.descripcion }}</h1>
+
+        <form id="form-respuesta" method="post" action="{% url 'responder' pregunta.id %}">
+            {% csrf_token %}
+            {% for respuesta in respuestas %}
+                <button type="button"
+                        class="opcion"
+                        data-id="{{ respuesta.id }}"
+                        data-correcta="{{ respuesta.correcta }}">
+                    {{ respuesta.descripcion }}
+                </button>
+            {% endfor %}
+        </form>
+    </div>
+
+    <script src="{% static 'js/juego.js' %}"></script>
+</body>
+</html>

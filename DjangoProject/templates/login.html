@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Quién quiere ser millonario - UNL</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <div class="form-card">
+        <h2>Iniciar Sesión</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Usuario" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <button type="submit">Ingresar</button>
+        </form>
+        <p class="switch">¿No tienes cuenta? <a href="{% url 'register' %}">Regístrate</a></p>
+    </div>
+</body>
+</html>
