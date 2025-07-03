@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <title>Pregunta en juego</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/juego.css' %}">
@@ -13,6 +14,12 @@
         </div>
 
         <h1>{{ pregunta.descripcion }}</h1>
+
+        <!-- Temporizador -->
+        <div id="temporizador" data-tiempo="{{ tiempo_en_segundos }}">Cargando...</div>
+        <div class="barra-tiempo">
+            <div id="barra" class="barra-tiempo-llenado"></div>
+        </div>
 
         <form id="form-respuesta" method="post" action="{% url 'responder' pregunta.id %}">
             {% csrf_token %}

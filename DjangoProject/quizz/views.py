@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Prueba, Pregunta, Respuesta
+from .models import Prueba, Pregunta, Respuesta, ParametroTiempo
 import random
 
 # ------------------------------
@@ -64,6 +64,7 @@ def iniciar_juego(request, prueba_id):
     request.session['pregunta_actual'] = 0
     request.session['aciertos'] = 0
     request.session['errores'] = 0
+    request.session['puntaje'] = 0
 
     return redirect('jugar')
 
@@ -80,41 +81,50 @@ def jugar(request):
     respuestas = list(pregunta.respuestas.all())
     random.shuffle(respuestas)
 
+    # Obtener el parametro_tiempo desde el banco de la pregunta
+    parametro = pregunta.banco.parametro_tiempo
+    tiempo_en_segundos = int(parametro.tiempo.total_seconds()) if parametro else 30  # default 30 seg
+
     return render(request, 'juego.html', {
         'pregunta': pregunta,
         'respuestas': respuestas,
         'numero_actual': idx + 1,
-        'total': len(ids)
+        'total': len(ids),
+        'tiempo_en_segundos': tiempo_en_segundos,
     })
 
 
 @login_required
 def responder(request, pregunta_id):
     if request.method == 'POST':
-        respuesta_id = int(request.POST.get('respuesta_id'))
-        respuesta = get_object_or_404(Respuesta, id=respuesta_id)
-
-        # Asegura que los contadores existan
-        if 'aciertos' not in request.session:
-            request.session['aciertos'] = 0
-        if 'errores' not in request.session:
-            request.session['errores'] = 0
+        # Asegurarse de que el puntaje exista
         if 'puntaje' not in request.session:
             request.session['puntaje'] = 0
 
-        # Actualiza según la respuesta
-        if respuesta.correcta:
-            request.session['aciertos'] += 1
-            request.session['puntaje'] += 100
+        # Obtener el ID de la respuesta enviada
+        respuesta_id_str = request.POST.get('respuesta_id')
+
+        if respuesta_id_str:
+            respuesta_id = int(respuesta_id_str)
+            respuesta = get_object_or_404(Respuesta, id=respuesta_id)
+
+            if respuesta.correcta:
+                request.session['aciertos'] += 1
+                request.session['puntaje'] += 100  # Suma 100 puntos si es correcta
+            else:
+                request.session['errores'] += 1
         else:
+            # Si no seleccionó ninguna respuesta, se cuenta como error
             request.session['errores'] += 1
 
-        # Avanza a la siguiente pregunta
+        # Avanzar al siguiente índice de pregunta
         request.session['pregunta_actual'] += 1
+
+        # Redirigir nuevamente al juego (o resultado si termina)
         return redirect('jugar')
 
+    # Si no es POST, redirige al juego
     return redirect('jugar')
-
 
 @login_required
 def resultado(request):

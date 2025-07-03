@@ -1,12 +1,18 @@
 from django.db import models
 
-class BancoDePreguntas(models.Model):
+class ParametroTiempo(models.Model):
     nombre = models.CharField(max_length=100)
-    cantidad_preguntas = models.IntegerField(default=0)
-
+    tiempo = models.DurationField()
     def __str__(self):
         return self.nombre
 
+class BancoDePreguntas(models.Model):
+    nombre = models.CharField(max_length=100)
+    cantidad_preguntas = models.IntegerField(default=0)
+    parametro_tiempo = models.ForeignKey(ParametroTiempo, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return self.nombre
 
 class Pregunta(models.Model):
     descripcion = models.TextField()

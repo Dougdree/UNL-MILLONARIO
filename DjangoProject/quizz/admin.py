@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     BancoDePreguntas, Pregunta, Respuesta,
-    Grupo, Estudiante, Prueba
+    Grupo, Estudiante, Prueba, ParametroTiempo
 )
 
 # ------------------------------
@@ -30,6 +30,10 @@ class BancoDePreguntasAdmin(admin.ModelAdmin):
     search_fields = ('nombre',)
     inlines = [PreguntaInline]
 
+class ParametroTiempoAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'tiempo')
+    search_fields = ('nombre',)
+
 class EstudianteAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'correo')
     search_fields = ('nombre', 'correo')
@@ -48,6 +52,7 @@ class PruebaAdmin(admin.ModelAdmin):
 
 admin.site.register(BancoDePreguntas, BancoDePreguntasAdmin)
 admin.site.register(Pregunta, PreguntaAdmin)
+admin.site.register(ParametroTiempo, ParametroTiempoAdmin)
 admin.site.register(Grupo, GrupoAdmin)
 admin.site.register(Estudiante, EstudianteAdmin)
 admin.site.register(Prueba, PruebaAdmin)
