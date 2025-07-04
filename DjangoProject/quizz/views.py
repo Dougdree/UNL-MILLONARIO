@@ -54,13 +54,22 @@ def seleccionar_prueba(request):
 @login_required
 def iniciar_juego(request, prueba_id):
     prueba = get_object_or_404(Prueba, id=prueba_id)
+    
+    # Seleccionar preguntas del banco específico de la prueba en orden aleatorio
     preguntas = list(
-        Pregunta.objects.filter(banco__preguntas__isnull=False).distinct()
-    )[:prueba.numero_preguntas]
+        Pregunta.objects.filter(banco=prueba.banco_preguntas).order_by('?')
+    )
+    
+    # Verificar que hay suficientes preguntas en el banco
+    if len(preguntas) < prueba.numero_preguntas:
+        # Si no hay suficientes preguntas, tomar todas las disponibles ya aleatorizadas
+        preguntas_seleccionadas = preguntas
+    else:
+        # Seleccionar aleatoriamente el número requerido de preguntas
+        # Usar random.sample para una segunda aleatorización
+        preguntas_seleccionadas = random.sample(preguntas, prueba.numero_preguntas)
 
-    random.shuffle(preguntas)
-
-    request.session['preguntas_ids'] = [p.id for p in preguntas]
+    request.session['preguntas_ids'] = [p.id for p in preguntas_seleccionadas]
     request.session['pregunta_actual'] = 0
     request.session['aciertos'] = 0
     request.session['errores'] = 0

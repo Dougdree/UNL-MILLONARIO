@@ -11,18 +11,20 @@
         <h1>Selecciona una Prueba</h1>
 
         {% if pruebas %}
-            {% for prueba in pruebas %}
-                <form action="{% url 'iniciar_juego' prueba.id %}" method="get">
-                    <button type="submit" class="card-prueba">
-                        <span class="prueba-titulo">{{ prueba.titulo }}</span><br>
-                        <span class="prueba-datetime">
-                            Fecha: {{ prueba.fecha }}<br>
-                            Hora: {{ prueba.hora_inicio }}<br>
-                            Preguntas: {{ prueba.numero_preguntas }}
-                        </span>
-                    </button>
-                </form>
-            {% endfor %}
+            <div class="pruebas-grid">
+                {% for prueba in pruebas %}
+                    <form action="{% url 'iniciar_juego' prueba.id %}" method="get">
+                        <button type="submit" class="card-prueba">
+                            <span class="prueba-titulo">{{ prueba.titulo }}</span><br>
+                            <span class="prueba-datetime">
+                                Fecha: {{ prueba.fecha }}<br>
+                                Hora: {{ prueba.hora_inicio }}<br>
+                                Preguntas: {{ prueba.numero_preguntas }}
+                            </span>
+                        </button>
+                    </form>
+                {% endfor %}
+            </div>
         {% else %}
             <p>No hay pruebas disponibles actualmente.</p>
         {% endif %}

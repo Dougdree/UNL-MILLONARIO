@@ -53,6 +53,7 @@ class Prueba(models.Model):
     fecha = models.DateField()
     hora_inicio = models.TimeField()
     numero_preguntas = models.IntegerField(null=True, blank=True)
+    banco_preguntas = models.ForeignKey(BancoDePreguntas, on_delete=models.CASCADE, related_name='pruebas', null=True, blank=True)
     grupos = models.ManyToManyField(Grupo, related_name='pruebas')
 
     def __str__(self):
