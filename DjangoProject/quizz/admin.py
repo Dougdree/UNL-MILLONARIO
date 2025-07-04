@@ -21,8 +21,10 @@ class PreguntaInline(admin.TabularInline):
 # ------------------------------
 
 class PreguntaAdmin(admin.ModelAdmin):
-    list_display = ('descripcion', 'banco')
+    list_display = ('descripcion', 'ruta', 'banco')
     search_fields = ('descripcion',)
+    list_filter = ('banco',)
+    fields = ('descripcion', 'ruta', 'banco')
     inlines = [RespuestaInline]
 
 class BancoDePreguntasAdmin(admin.ModelAdmin):

@@ -15,6 +15,13 @@
 
         <h1>{{ pregunta.descripcion }}</h1>
 
+        <!-- Imagen de la pregunta -->
+        {% if pregunta.ruta %}
+            <div class="imagen-pregunta">
+                <img src="{% static pregunta.ruta %}" alt="Imagen de la pregunta" class="pregunta-img">
+            </div>
+        {% endif %}
+
         <!-- Temporizador -->
         <div id="temporizador" data-tiempo="{{ tiempo_en_segundos }}">Cargando...</div>
         <div class="barra-tiempo">
